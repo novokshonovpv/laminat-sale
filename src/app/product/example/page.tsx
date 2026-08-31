@@ -1,23 +1,19 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { LaminateCalculator } from "@/components/laminate-calculator";
 import { ProductCard } from "@/components/product-card";
 import { ProductImageShowcase } from "@/components/product-image-showcase";
 import { formatPrice, formatThickness, products } from "@/data/products";
 
-type ProductPageProps = { searchParams: Promise<{ model?: string }> };
-
 function getProduct(model?: string) {
   return products.find((item) => item.id === model) ?? products[0];
 }
 
-export async function generateMetadata({ searchParams }: ProductPageProps): Promise<Metadata> {
-  const product = getProduct((await searchParams).model);
-  return { title: product.name, description: product.description };
-}
-
-export default async function ProductPage({ searchParams }: ProductPageProps) {
-  const product = getProduct((await searchParams).model);
+export default function ProductPage() {
+  const searchParams = useSearchParams();
+  const product = getProduct(searchParams.get("model") ?? undefined);
   const related = products.filter((item) => item.id !== product.id).slice(0, 3);
   const inStock = product.stockPackages > 0;
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { ProductCard } from "@/components/product-card";
 import type { Product, ProductColor } from "@/data/products";
 import { catalogOptions, formatThickness } from "@/data/products";
@@ -12,7 +13,8 @@ function toggleValue<T>(values: T[], value: T) {
 }
 
 export function CatalogExplorer({ items, initialQuery = "" }: { items: Product[]; initialQuery?: string }) {
-  const [query, setQuery] = useState(initialQuery);
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(initialQuery || searchParams.get("q") || "");
   const [brands, setBrands] = useState<string[]>([]);
   const [classes, setClasses] = useState<number[]>([]);
   const [thicknesses, setThicknesses] = useState<number[]>([]);
