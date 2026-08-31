@@ -34,9 +34,6 @@ jobs:
 
       - name: Собрать сайт
         run: npm run build
-        env:
-          GITHUB_PAGES: "true"
-          NEXT_PUBLIC_ASSET_PREFIX: "/laminat-sale"
 
       - name: Настроить GitHub Pages
         uses: actions/configure-pages@v5
@@ -54,6 +51,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Опубликовать GitHub Pages
+      - name: Опубликовать сайт
         id: deployment
         uses: actions/deploy-pages@v5
