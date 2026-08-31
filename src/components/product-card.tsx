@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/data/products";
 import { formatPrice, formatThickness } from "@/data/products";
+import { assetPath } from "@/lib/asset-path";
 
 export function ProductCard({ product }: { product: Product }) {
   const inStock = product.stockPackages > 0;
@@ -10,7 +11,7 @@ export function ProductCard({ product }: { product: Product }) {
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-[#d3c5b4] bg-[#fbf8f2] transition-shadow hover:shadow-[0_18px_45px_rgba(74,53,36,0.10)]">
       <Link href={`/product/example?model=${product.id}`} className="flex h-full flex-col">
         <div className="relative h-48 shrink-0 overflow-hidden bg-[#e7ded2]">
-          <Image src={product.image} alt={`Декор ${product.name}`} fill quality={90} sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" className="object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+          <Image src={assetPath(product.image)} alt={`Декор ${product.name}`} fill quality={90} sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" className="object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
           {product.badge && <span className="absolute left-4 top-4 rounded-full bg-[#f8f3eb]/95 px-3 py-1.5 text-xs font-semibold text-[#49392e] shadow-sm">{product.badge}</span>}
           <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#60452f] shadow-sm transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
         </div>

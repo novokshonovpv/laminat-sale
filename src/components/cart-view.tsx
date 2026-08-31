@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatPrice, formatThickness, products } from "@/data/products";
 import { useCart } from "@/lib/cart-store";
+import { assetPath } from "@/lib/asset-path";
 
 export function CartView() {
   const { items, removeItem, updateItem } = useCart();
@@ -48,7 +49,7 @@ export function CartView() {
 
             return (
               <article key={product.id} className="grid gap-5 rounded-3xl border border-[#d3c5b4] bg-[#fbf8f2] p-5 sm:grid-cols-[150px_1fr]">
-                <div className="relative min-h-36 overflow-hidden rounded-2xl bg-[#e7ded2]"><Image src={product.image} alt={`Декор ${product.name}`} fill sizes="150px" className="object-cover" /></div>
+                <div className="relative min-h-36 overflow-hidden rounded-2xl bg-[#e7ded2]"><Image src={assetPath(product.image)} alt={`Декор ${product.name}`} fill sizes="150px" className="object-cover" /></div>
                 <div className="flex flex-col justify-between gap-5">
                   <div className="flex justify-between gap-4">
                     <div>
