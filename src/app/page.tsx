@@ -52,7 +52,7 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">Преимущества SPC кварц-винилового ламината</h2>
             <p className="mt-5 max-w-lg text-sm leading-6 text-[#756a5f]">SPC — это жёсткая минерально-полимерная плита с декоративным и защитным слоями. Она сочетает внешний вид натурального дерева с практичностью современного напольного покрытия.</p>
             <figure className="mt-7 overflow-hidden rounded-3xl border border-[#d9cdbd] bg-white shadow-[0_14px_35px_rgba(74,53,36,0.08)]">
-              <Image src={assetPath("/spc-structure-ru.png")} alt="Структура SPC-ламината: защитные и декоративный слои, жёсткая SPC-основа и замковая система" width={1254} height={1254} quality={95} sizes="(max-width: 1024px) 100vw, 36vw" className="h-auto w-full" />
+              <Image src={assetPath("/spc-structure-ru.jpg")} alt="Структура SPC-ламината: защитные и декоративный слои, жёсткая SPC-основа и замковая система" width={800} height={800} quality={90} sizes="(max-width: 1024px) 100vw, 36vw" className="h-auto w-full" />
               <figcaption className="border-t border-[#e5dbcd] bg-[#fbf8f2] px-5 py-3 text-xs leading-5 text-[#756a5f]">Структура SPC-панели и замкового соединения</figcaption>
             </figure>
             <Link href="/catalog" className="mt-7 inline-flex min-h-11 items-center justify-center rounded-full border border-[#b9a792] px-6 py-2 text-sm font-semibold text-[#60452f] hover:bg-[#eee5d7]">Выбрать SPC-ламинат <span className="ml-3">→</span></Link>
