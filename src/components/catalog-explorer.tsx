@@ -22,7 +22,7 @@ export function CatalogExplorer({ items, initialQuery = "" }: { items: Product[]
 
   useEffect(() => {
     const urlQuery = new URLSearchParams(window.location.search).get("q");
-    if (urlQuery) setQuery(urlQuery);
+    if (urlQuery) queueMicrotask(() => setQuery(urlQuery));
   }, []);
 
   const filteredProducts = useMemo(() => {

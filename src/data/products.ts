@@ -59,6 +59,7 @@ function product({
 }: ProductInput): Product {
   const normalizedModel = model.toLowerCase();
   const stockSquareMeters = stockedModels.has(model) ? 500 : 0;
+  void price;
 
   return {
     id: `spc-${normalizedModel}`,
