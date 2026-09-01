@@ -5,14 +5,13 @@ type ProductImageShowcaseProps = {
   image: string;
   alt: string;
   badge?: string;
-  stone?: boolean;
 };
 
-export function ProductImageShowcase({ image, alt, badge, stone = false }: ProductImageShowcaseProps) {
+export function ProductImageShowcase({ image, alt, badge }: ProductImageShowcaseProps) {
   const imageSrc = assetPath(image);
   return (
     <div className="relative overflow-hidden rounded-[2rem] border border-[#d8ccbd] bg-[#e5ddd2] shadow-[0_18px_45px_rgba(74,53,36,0.08)]">
-      <div className={`relative bg-[radial-gradient(circle_at_center,#f7f1e8_0%,#e5ddd2_72%)] ${stone ? "aspect-[295/149]" : "aspect-[714/220]"}`}>
+      <div className="relative aspect-[714/220] bg-[radial-gradient(circle_at_center,#f7f1e8_0%,#e5ddd2_72%)]">
         <Image
           src={imageSrc}
           alt={alt}
@@ -20,7 +19,7 @@ export function ProductImageShowcase({ image, alt, badge, stone = false }: Produ
           priority
           quality={95}
           sizes="(max-width: 1024px) 100vw, 55vw"
-          className={stone ? "object-cover" : "object-contain px-[4%] py-[5%] drop-shadow-[0_12px_14px_rgba(74,53,36,0.18)]"}
+          className="object-contain px-[4%] py-[5%] drop-shadow-[0_12px_14px_rgba(74,53,36,0.18)]"
         />
       </div>
       {badge && <span className="absolute left-5 top-5 rounded-full bg-white/92 px-4 py-2 text-xs font-semibold shadow-sm sm:left-7 sm:top-7">{badge}</span>}
@@ -28,4 +27,3 @@ export function ProductImageShowcase({ image, alt, badge, stone = false }: Produ
     </div>
   );
 }
-

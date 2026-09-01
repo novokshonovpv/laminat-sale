@@ -13,7 +13,7 @@ export function ProductDetail({ product }: { product: Product }) {
       <nav className="mb-8 flex flex-wrap gap-2 text-xs text-[#85776a]" aria-label="Хлебные крошки"><Link href="/">Главная</Link><span>/</span><Link href="/catalog">Каталог</Link><span>/</span><span className="text-[#493b30]">Модель {product.model}</span></nav>
       <section className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:gap-14">
         <div>
-          <ProductImageShowcase image={product.image} alt={`Декор ${product.name}`} badge={product.badge} stone={product.collection === "Каменная серия"} />
+          <ProductImageShowcase image={product.image} alt={`Декор ${product.name}`} badge={product.badge} />
           <p className="mt-3 text-center text-xs text-[#8b7e72]">Фактический оттенок может незначительно отличаться из-за настроек экрана</p>
         </div>
         <div className="flex flex-col justify-center">

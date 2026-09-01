@@ -10,8 +10,8 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-[#d3c5b4] bg-[#fbf8f2] transition-shadow hover:shadow-[0_18px_45px_rgba(74,53,36,0.10)]">
       <Link href={`/product/${getProductSlug(product)}`} className="flex h-full flex-col">
-        <div className="relative h-48 shrink-0 overflow-hidden bg-[#e7ded2]">
-          <Image src={assetPath(product.image)} alt={`Декор ${product.name}`} fill quality={90} sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" className="object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+        <div className="relative h-48 shrink-0 overflow-hidden bg-[radial-gradient(circle_at_center,#f7f1e8_0%,#e5ddd2_72%)]">
+          <Image src={assetPath(product.image)} alt={`Декор ${product.name}`} fill quality={90} sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" className="object-contain px-[4%] py-[5%] drop-shadow-[0_8px_10px_rgba(74,53,36,0.16)] transition-transform duration-300 group-hover:scale-[1.03]" />
           {product.badge && <span className="absolute left-4 top-4 rounded-full bg-[#f8f3eb]/95 px-3 py-1.5 text-xs font-semibold text-[#49392e] shadow-sm">{product.badge}</span>}
           <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#60452f] shadow-sm transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
         </div>
