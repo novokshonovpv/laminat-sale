@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { formatPrice, formatThickness, products } from "@/data/products";
+import { formatPrice, formatThickness, getProductSlug, products } from "@/data/products";
 import { useCart } from "@/lib/cart-store";
 import { assetPath } from "@/lib/asset-path";
 
@@ -16,7 +16,8 @@ export function CartView() {
     return product ? [{ ...cartItem, product }] : [];
   });
   const totalArea = lines.reduce((total, line) => total + line.packages * line.product.packageArea, 0);
-  const totalPrice = Math.round(lines.reduce((total, line) => total + line.packages * line.product.packageArea * line.product.pricePerSquareMeter, 0));
+  const hasRequestPrice = lines.some((line) => line.product.pricePerSquareMeter === undefined);
+  const totalPrice = Math.round(lines.reduce((total, line) => total + line.packages * line.product.packageArea * (line.product.pricePerSquareMeter ?? 0), 0));
 
   function handleDemoSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,7 +46,7 @@ export function CartView() {
         <section className="space-y-4" aria-label="Товары в корзине">
           {lines.map(({ product, packages }) => {
             const area = packages * product.packageArea;
-            const subtotal = Math.round(product.pricePerSquareMeter * area);
+            const subtotal = product.pricePerSquareMeter === undefined ? undefined : Math.round(product.pricePerSquareMeter * area);
 
             return (
               <article key={product.id} className="grid gap-5 rounded-3xl border border-[#d3c5b4] bg-[#fbf8f2] p-5 sm:grid-cols-[150px_1fr]">
@@ -54,7 +55,7 @@ export function CartView() {
                   <div className="flex justify-between gap-4">
                     <div>
                       <p className="text-xs uppercase tracking-[0.15em] text-[#8f7d6c]">Модель {product.model} · {product.collection}</p>
-                      <Link href={`/product/example?model=${product.id}`} className="mt-2 block text-xl font-semibold">{product.name}</Link>
+                      <Link href={`/product/${getProductSlug(product)}`} className="mt-2 block text-xl font-semibold">{product.name}</Link>
                       <p className="mt-2 text-sm text-[#756a5f]">{product.class} класс · {formatThickness(product.thickness)} мм · упаковка {product.packageArea.toLocaleString("ru-RU")} м²</p>
                     </div>
                     <button type="button" onClick={() => removeItem(product.id)} aria-label={`Удалить ${product.name}`} className="h-9 w-9 shrink-0 rounded-full border border-[#d3c5b4] text-[#8b7767] hover:border-[#9a654b] hover:text-[#9a654b]">×</button>
@@ -69,7 +70,7 @@ export function CartView() {
                       </div>
                       <p className="mt-2 text-xs text-[#8b7f74]">Площадь: {area.toLocaleString("ru-RU", { maximumFractionDigits: 2 })} м²</p>
                     </div>
-                    <strong className="text-xl">{formatPrice(subtotal)} ₽</strong>
+                    <div className="text-right"><strong className="text-xl">{subtotal === undefined ? "Цена по запросу" : `${formatPrice(subtotal)} ₽`}</strong>{product.vatPercent && <p className="mt-1 text-xs text-[#54704b]">с НДС {product.vatPercent}%</p>}</div>
                   </div>
                 </div>
               </article>
@@ -85,7 +86,7 @@ export function CartView() {
             <div className="flex justify-between text-[#cfc0b2]"><dt>Упаковок</dt><dd>{lines.reduce((total, line) => total + line.packages, 0)}</dd></div>
             <div className="flex justify-between text-[#cfc0b2]"><dt>Общая площадь</dt><dd>{totalArea.toLocaleString("ru-RU", { maximumFractionDigits: 2 })} м²</dd></div>
             <div className="flex justify-between text-[#cfc0b2]"><dt>Доставка</dt><dd>Рассчитаем отдельно</dd></div>
-            <div className="flex justify-between border-t border-white/15 pt-5 text-lg font-semibold"><dt>К оплате</dt><dd>{formatPrice(totalPrice)} ₽</dd></div>
+            <div className="flex justify-between border-t border-white/15 pt-5 text-lg font-semibold"><dt>{hasRequestPrice ? "Итого" : "К оплате"}</dt><dd>{hasRequestPrice ? "По запросу" : `${formatPrice(totalPrice)} ₽`}</dd></div>
           </dl>
           <button type="button" onClick={() => { setCheckoutOpen(true); setSubmitted(false); }} className="mt-7 w-full rounded-full bg-[#d9c19f] px-6 py-3.5 text-sm font-semibold text-[#3b2e24]">Оформить заказ</button>
           <p className="mt-4 text-center text-xs leading-5 text-[#bcaea1]">Демонстрационный режим · данные не отправляются</p>

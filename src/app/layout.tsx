@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://laminat-sale-smolensk.pavelnovokshonov.chatgpt.site"),
   title: { default: "ЛАМИНАТ.СЕЙЛ — интернет-магазин ламината", template: "%s — ЛАМИНАТ.СЕЙЛ" },
   description: "SPC-ламинат напрямую с завода. Выгодные цены и наличие на складе в Смоленске",
 };

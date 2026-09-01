@@ -1,7 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "@/components/product-card";
 import type { Product, ProductColor } from "@/data/products";
 import { catalogOptions, formatThickness } from "@/data/products";
@@ -13,14 +12,18 @@ function toggleValue<T>(values: T[], value: T) {
 }
 
 export function CatalogExplorer({ items, initialQuery = "" }: { items: Product[]; initialQuery?: string }) {
-  const searchParams = useSearchParams();
-  const [query, setQuery] = useState(initialQuery || searchParams.get("q") || "");
+  const [query, setQuery] = useState(initialQuery);
   const [brands, setBrands] = useState<string[]>([]);
   const [classes, setClasses] = useState<number[]>([]);
   const [thicknesses, setThicknesses] = useState<number[]>([]);
   const [colors, setColors] = useState<ProductColor[]>([]);
   const [availability, setAvailability] = useState<"all" | "stock" | "order">("all");
   const [sort, setSort] = useState<SortMode>("popular");
+
+  useEffect(() => {
+    const urlQuery = new URLSearchParams(window.location.search).get("q");
+    if (urlQuery) setQuery(urlQuery);
+  }, []);
 
   const filteredProducts = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("ru-RU");
@@ -30,8 +33,8 @@ export function CatalogExplorer({ items, initialQuery = "" }: { items: Product[]
       .filter((product) => classes.length === 0 || classes.includes(product.class))
       .filter((product) => thicknesses.length === 0 || thicknesses.includes(product.thickness))
       .filter((product) => colors.length === 0 || colors.includes(product.color))
-      .filter((product) => availability === "all" || (availability === "stock" ? product.stockPackages > 0 : product.stockPackages === 0))
-      .sort((a, b) => sort === "price-asc" ? a.pricePerSquareMeter - b.pricePerSquareMeter : sort === "price-desc" ? b.pricePerSquareMeter - a.pricePerSquareMeter : b.stockPackages - a.stockPackages);
+      .filter((product) => availability === "all" || (availability === "stock" ? product.stockSquareMeters > 0 : product.stockSquareMeters === 0))
+      .sort((a, b) => sort === "price-asc" ? (a.pricePerSquareMeter ?? Number.MAX_SAFE_INTEGER) - (b.pricePerSquareMeter ?? Number.MAX_SAFE_INTEGER) : sort === "price-desc" ? (b.pricePerSquareMeter ?? -1) - (a.pricePerSquareMeter ?? -1) : b.stockSquareMeters - a.stockSquareMeters);
   }, [availability, brands, classes, colors, items, query, sort, thicknesses]);
 
   const activeFilters = brands.length + classes.length + thicknesses.length + colors.length + (availability === "all" ? 0 : 1) + (query ? 1 : 0);
