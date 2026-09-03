@@ -103,7 +103,8 @@ export function CartView() {
               <label className="text-sm font-medium">Имя<input required name="name" autoComplete="name" className="mt-2 min-h-12 w-full rounded-xl border border-[#c9b9a5] bg-white px-4 outline-none focus:border-[#71482e]" /></label>
               <label className="text-sm font-medium">Телефон<input required name="phone" type="tel" autoComplete="tel" className="mt-2 min-h-12 w-full rounded-xl border border-[#c9b9a5] bg-white px-4 outline-none focus:border-[#71482e]" /></label>
               <label className="text-sm font-medium sm:col-span-2">Комментарий<textarea name="comment" rows={3} className="mt-2 w-full rounded-xl border border-[#c9b9a5] bg-white px-4 py-3 outline-none focus:border-[#71482e]" placeholder="Например, удобное время для звонка" /></label>
-              <label className="flex items-start gap-3 rounded-2xl border border-[#c9b9a5] bg-white/60 p-4 text-sm leading-6 sm:col-span-2"><input required name="personal-data-consent" type="checkbox" className="mt-1 h-4 w-4 shrink-0 accent-[#71482e]" /><span>Я даю отдельное <Link href="/personal-data-consent" target="_blank" className="font-semibold text-[#71482e] underline underline-offset-4">согласие на обработку персональных данных</Link> и ознакомлен(а) с <Link href="/privacy" target="_blank" className="font-semibold text-[#71482e] underline underline-offset-4">Политикой конфиденциальности</Link>.</span></label>
+              <label className="flex items-start gap-3 rounded-2xl border border-[#c9b9a5] bg-white/60 p-4 text-sm leading-6 sm:col-span-2"><input required name="privacy-policy-acknowledgement" type="checkbox" className="mt-1 h-4 w-4 shrink-0 accent-[#71482e]" /><span>Я ознакомлен(а) с <Link href="/privacy" target="_blank" className="font-semibold text-[#71482e] underline underline-offset-4">Политикой конфиденциальности и обработки персональных данных</Link>.</span></label>
+              <label className="flex items-start gap-3 rounded-2xl border border-[#c9b9a5] bg-white/60 p-4 text-sm leading-6 sm:col-span-2"><input required name="personal-data-consent" type="checkbox" className="mt-1 h-4 w-4 shrink-0 accent-[#71482e]" /><span>Я отдельно даю <Link href="/personal-data-consent" target="_blank" className="font-semibold text-[#71482e] underline underline-offset-4">согласие на обработку персональных данных</Link>.</span></label>
               <div className="sm:col-span-2"><button type="submit" className="rounded-full bg-[#71482e] px-7 py-3 text-sm font-semibold text-white">Показать подтверждение</button><p className="mt-3 text-xs text-[#817469]">Нажатие только показывает демонстрационное подтверждение. Данные не отправляются и не сохраняются.</p></div>
             </form>
           )}
@@ -114,3 +115,4 @@ export function CartView() {
     </div>
   );
 }
+

@@ -6,7 +6,7 @@ const origin = "https://laminat-sale-smolensk.pavelnovokshonov.chatgpt.site";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/catalog", "/privacy", "/personal-data-consent"].map((path) => ({
+  const staticPages = ["", "/catalog", "/privacy", "/personal-data-consent", "/cookies"].map((path) => ({
     url: `${origin}${path}/`.replace(`${origin}//`, `${origin}/`),
     changeFrequency: path === "/catalog" ? ("weekly" as const) : ("monthly" as const),
     priority: path === "" ? 1 : path === "/catalog" ? 0.9 : 0.3,
@@ -20,3 +20,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticPages, ...productPages];
 }
+

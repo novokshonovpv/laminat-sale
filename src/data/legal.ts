@@ -1,11 +1,12 @@
-const LEGAL_PLACEHOLDER = "ХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХХ";
-
 export const legalDetails = {
-  effectiveDate: "30 августа 2026 года",
-  operatorName: LEGAL_PLACEHOLDER,
-  operatorAddress: LEGAL_PLACEHOLDER,
-  inn: LEGAL_PLACEHOLDER,
-  registrationNumber: LEGAL_PLACEHOLDER,
-  privacyEmail: LEGAL_PLACEHOLDER,
-  siteAddress: LEGAL_PLACEHOLDER,
+  effectiveDate: "3 сентября 2026 года",
+  operatorName: "Индивидуальный предприниматель Новокшонова Вероника Валерьевна",
+  operatorShortName: "ИП Новокшонова Вероника Валерьевна",
+  operatorAddress: "Смоленская область, г. Смоленск, Краснинское ш., д. 37, ТЦ «Автомолл»",
+  inn: "672707561598",
+  registrationNumber: "324670000018304",
+  privacyEmail: "67@67moto.ru",
+  contactPhone: "+7 (993) 883-14-77",
+  siteAddress: "https://laminat.sale",
 };
+

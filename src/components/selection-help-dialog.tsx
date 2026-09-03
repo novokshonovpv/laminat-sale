@@ -46,7 +46,7 @@ export function SelectionHelpDialog() {
             {submitted ? (
               <div className="mt-8 rounded-3xl border border-[#c9b9a5] bg-[#f4ecdf] p-6">
                 <h3 className="text-xl font-semibold">Форма заполнена</h3>
-                <p className="mt-3 text-sm leading-6 text-[#756a5f]">Это демонстрационная версия: введённые данные никуда не переданы. Отправка будет подключена после заполнения реквизитов оператора и настройки российского обработчика персональных данных.</p>
+                <p className="mt-3 text-sm leading-6 text-[#756a5f]">Это демонстрационная версия: введённые данные никуда не переданы. Отправка будет подключена после настройки российского обработчика персональных данных и фиксации согласий.</p>
                 <button type="button" onClick={closeDialog} className="mt-5 rounded-full bg-[#71482e] px-6 py-3 text-sm font-semibold text-white">Понятно</button>
               </div>
             ) : (
