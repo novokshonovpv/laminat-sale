@@ -39,7 +39,7 @@ type ProductInput = {
   description?: string;
 };
 
-const stockedModels = new Set(["804", "805", "807", "810", "908", "910"]);
+const stockedModels = new Set(["804", "805", "807", "810", "908"]);
 
 function product({
   model,
@@ -72,7 +72,7 @@ function product({
     dimensions,
     packageArea,
     piecesPerPackage,
-    pricePerSquareMeter: stockSquareMeters > 0 ? 1750 : undefined,
+    pricePerSquareMeter: stockSquareMeters > 0 ? 1950 : undefined,
     vatPercent: stockSquareMeters > 0 ? 22 : undefined,
     stockSquareMeters,
     color,
@@ -185,3 +185,4 @@ export function getProductSlug(item: Product) {
 export function getProductBySlug(slug: string) {
   return products.find((item) => getProductSlug(item) === slug);
 }
+
