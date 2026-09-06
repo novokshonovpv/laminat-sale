@@ -2,10 +2,10 @@ import Link from "next/link";
 import { LaminateCalculator } from "@/components/laminate-calculator";
 import { ProductCard } from "@/components/product-card";
 import { ProductImageShowcase } from "@/components/product-image-showcase";
-import { formatPrice, formatThickness, products, type Product } from "@/data/products";
+import { formatPrice, formatThickness, getStockWeightedProducts, products, type Product } from "@/data/products";
 
 export function ProductDetail({ product }: { product: Product }) {
-  const related = products.filter((item) => item.id !== product.id).slice(0, 3);
+  const related = getStockWeightedProducts(products.filter((item) => item.id !== product.id), 5);
   const inStock = product.stockSquareMeters > 0;
 
   return (
@@ -31,7 +31,8 @@ export function ProductDetail({ product }: { product: Product }) {
         <div className="rounded-[2rem] bg-[#3e3228] p-7 text-[#f7efe5] sm:p-9"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c9aa8c]">Где использовать</p><h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">Для дома и коммерческих пространств</h2><p className="mt-4 text-sm leading-6 text-[#cfc0b2]">SPC-панели предназначены для внутренней отделки жилых, административных и торговых помещений с сухим или нормальным уровнем влажности.</p></div>
         <div className="rounded-[2rem] border border-[#d9cdbd] bg-[#fbf8f2] p-7 sm:p-9"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8b5e3c]">Перед укладкой</p><h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">Основание решает всё</h2><div className="mt-6 grid gap-4 sm:grid-cols-3"><div><strong className="text-lg">≤ 2 мм</strong><p className="mt-2 text-sm leading-6 text-[#756a5f]">допустимый перепад основания на участке длиной 2 метра</p></div><div><strong className="text-lg">Без клея</strong><p className="mt-2 text-sm leading-6 text-[#756a5f]">панели соединяются профилированным замком click-lock</p></div><div><strong className="text-lg">Ровно и чисто</strong><p className="mt-2 text-sm leading-6 text-[#756a5f]">основание должно быть подготовленным перед началом монтажа</p></div></div></div>
       </section>
-      <section className="mt-20 border-t border-[#d9cdbd] pt-14"><div className="mb-8 flex items-end justify-between"><h2 className="text-3xl font-semibold tracking-[-0.04em]">Похожие декоры</h2><Link href="/catalog" className="text-sm font-semibold text-[#71482e]">В каталог →</Link></div><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{related.map((item) => <ProductCard key={item.id} product={item} />)}</div></section>
+      <section className="mt-20 border-t border-[#d9cdbd] pt-14"><div className="mb-8 flex items-end justify-between"><h2 className="text-3xl font-semibold tracking-[-0.04em]">Похожие декоры</h2><Link href="/catalog" className="text-sm font-semibold text-[#71482e]">В каталог →</Link></div><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">{related.map((item) => <ProductCard key={item.id} product={item} />)}</div></section>
     </div>
   );
 }
+

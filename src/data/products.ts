@@ -161,6 +161,22 @@ export const catalogOptions = {
 export const formatPrice = (value: number) => new Intl.NumberFormat("ru-RU").format(value);
 export const formatThickness = (value: number) => value.toLocaleString("ru-RU");
 
+export function getStockWeightedProducts(items: Product[], limit = items.length) {
+  const stocked = items.filter((item) => item.stockSquareMeters > 0);
+  const madeToOrder = items.filter((item) => item.stockSquareMeters === 0);
+  const result: Product[] = [];
+
+  while (result.length < limit && (stocked.length > 0 || madeToOrder.length > 0)) {
+    result.push(...stocked.splice(0, Math.min(4, stocked.length, limit - result.length)));
+    const nextOrder = madeToOrder.shift();
+    if (result.length < limit && nextOrder) result.push(nextOrder);
+    if (stocked.length === 0) result.push(...madeToOrder.splice(0, limit - result.length));
+    if (madeToOrder.length === 0) result.push(...stocked.splice(0, limit - result.length));
+  }
+
+  return result.slice(0, limit);
+}
+
 const transliteration: Record<string, string> = {
   а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ё: "e", ж: "zh", з: "z", и: "i", й: "y",
   к: "k", л: "l", м: "m", н: "n", о: "o", п: "p", р: "r", с: "s", т: "t", у: "u", ф: "f",

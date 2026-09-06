@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "@/components/product-card";
 import type { Product, ProductColor } from "@/data/products";
-import { catalogOptions, formatThickness } from "@/data/products";
+import { catalogOptions, formatThickness, getStockWeightedProducts } from "@/data/products";
 
 type SortMode = "popular" | "price-asc" | "price-desc";
 
@@ -27,14 +27,15 @@ export function CatalogExplorer({ items, initialQuery = "" }: { items: Product[]
 
   const filteredProducts = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("ru-RU");
-    return items
+    const filtered = items
       .filter((product) => !normalizedQuery || [product.name, product.model, product.brand, product.collection, product.color].some((value) => value.toLocaleLowerCase("ru-RU").includes(normalizedQuery)))
       .filter((product) => brands.length === 0 || brands.includes(product.brand))
       .filter((product) => classes.length === 0 || classes.includes(product.class))
       .filter((product) => thicknesses.length === 0 || thicknesses.includes(product.thickness))
       .filter((product) => colors.length === 0 || colors.includes(product.color))
-      .filter((product) => availability === "all" || (availability === "stock" ? product.stockSquareMeters > 0 : product.stockSquareMeters === 0))
-      .sort((a, b) => sort === "price-asc" ? (a.pricePerSquareMeter ?? Number.MAX_SAFE_INTEGER) - (b.pricePerSquareMeter ?? Number.MAX_SAFE_INTEGER) : sort === "price-desc" ? (b.pricePerSquareMeter ?? -1) - (a.pricePerSquareMeter ?? -1) : b.stockSquareMeters - a.stockSquareMeters);
+      .filter((product) => availability === "all" || (availability === "stock" ? product.stockSquareMeters > 0 : product.stockSquareMeters === 0));
+    if (sort === "popular") return getStockWeightedProducts(filtered);
+    return filtered.sort((a, b) => sort === "price-asc" ? (a.pricePerSquareMeter ?? Number.MAX_SAFE_INTEGER) - (b.pricePerSquareMeter ?? Number.MAX_SAFE_INTEGER) : (b.pricePerSquareMeter ?? -1) - (a.pricePerSquareMeter ?? -1));
   }, [availability, brands, classes, colors, items, query, sort, thicknesses]);
 
   const activeFilters = brands.length + classes.length + thicknesses.length + colors.length + (availability === "all" ? 0 : 1) + (query ? 1 : 0);
@@ -68,3 +69,4 @@ export function CatalogExplorer({ items, initialQuery = "" }: { items: Product[]
 function FilterGroup<T extends string | number>({ title, options, selected, render, onToggle }: { title: string; options: T[]; selected: T[]; render: (value: T) => string; onToggle: (value: T) => void }) {
   return <fieldset className="mt-6 border-t border-[#ded3c5] pt-6"><legend className="text-sm font-semibold">{title}</legend><div className="mt-3 space-y-3">{options.map((option) => <label key={String(option)} className="flex cursor-pointer items-center gap-3 text-sm text-[#62584f]"><input checked={selected.includes(option)} onChange={() => onToggle(option)} type="checkbox" className="h-4 w-4 accent-[#71482e]" />{render(option)}</label>)}</div></fieldset>;
 }
+
