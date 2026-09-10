@@ -38,6 +38,14 @@ const spcLayers = [
   ["04", "Замок click-lock", "Соединяет панели без клея в единое покрытие."],
 ];
 
+const technicalHighlights = [
+  ["22 дБ", "Снижение ударного шума"],
+  ["до 27 °C", "Совместимость с тёплым полом"],
+  ["A+", "Класс эмиссии VOC"],
+  ["Bfl-s1", "Класс пожарной опасности"],
+  ["0,05–0,12%", "Водопоглощение при испытаниях"],
+];
+
 export default function Home() {
   return (
     <>
@@ -77,6 +85,26 @@ export default function Home() {
             <ol className="grid gap-px overflow-hidden rounded-3xl bg-white/15 sm:grid-cols-2">
               {spcLayers.map(([number, title, description]) => <li key={number} className="bg-[#493b30] p-5 sm:p-6"><span className="text-xs text-[#c9aa8c]">{number}</span><h4 className="mt-3 font-semibold">{title}</h4><p className="mt-2 text-sm leading-6 text-[#cfc0b2]">{description}</p></li>)}
             </ol>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-[#d9cdbd] bg-[#eee5d7]">
+        <div className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-12">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8b5e3c]">Данные технического листа</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">Характеристики, подтверждённые испытаниями</h2>
+              <p className="mt-5 max-w-xl text-sm leading-6 text-[#756a5f]">В документе производителя собраны результаты испытаний SPC-покрытия по европейским и международным стандартам.</p>
+              <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                {technicalHighlights.map(([value, label]) => <div key={label} className="rounded-2xl border border-[#d3c5b4] bg-[#fbf8f2] p-5"><strong className="text-2xl text-[#71482e]">{value}</strong><p className="mt-2 text-sm leading-5 text-[#6e6257]">{label}</p></div>)}
+              </div>
+              <p className="mt-5 text-xs leading-5 text-[#887b70]">Показатели относятся к сериям, указанным в техническом листе. Точные характеристики выбранной модели уточняйте перед заказом.</p>
+            </div>
+            <a href={assetPath("/spc-technical-sheet.jpg")} target="_blank" rel="noreferrer" className="group overflow-hidden rounded-[2rem] border border-[#cdbb9f] bg-white shadow-[0_18px_45px_rgba(74,53,36,0.10)]">
+              <Image src={assetPath("/spc-technical-sheet.jpg")} alt="Техническая спецификация и результаты испытаний SPC Flooring" width={1280} height={853} quality={95} sizes="(max-width: 1024px) 100vw, 55vw" className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.01]" />
+              <span className="flex items-center justify-between border-t border-[#e5dbcd] bg-[#fbf8f2] px-5 py-4 text-sm font-semibold text-[#60452f]"><span>Открыть технический лист</span><span aria-hidden="true">↗</span></span>
+            </a>
           </div>
         </div>
       </section>
