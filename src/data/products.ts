@@ -39,7 +39,7 @@ type ProductInput = {
   description?: string;
 };
 
-const stockedModels = new Set(["804", "805", "807", "810", "908"]);
+const stockedModels = new Set(["804", "805", "807", "810", "908", "910"]);
 
 function product({
   model,
