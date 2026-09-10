@@ -47,7 +47,7 @@ export function CatalogExplorer({ items, initialQuery = "" }: { items: Product[]
         <label className="sr-only" htmlFor="live-catalog-search">Поиск по каталогу</label><span className="pl-4 text-[#8b7767]" aria-hidden="true">⌕</span><input id="live-catalog-search" value={query} onChange={(event) => setQuery(event.target.value)} type="search" placeholder="Название, бренд, коллекция или цвет" className="min-w-0 flex-1 bg-transparent px-3 text-sm outline-none placeholder:text-[#9a8e83]" />{query && <button onClick={() => setQuery("")} className="mr-4 text-xs font-semibold text-[#8b5e3c]" type="button">Очистить</button>}
       </div>
       <div className="mt-10 grid gap-8 lg:grid-cols-[280px_1fr]">
-        <aside className="h-fit rounded-3xl border border-[#d3c5b4] bg-[#fbf8f2] p-6 lg:sticky lg:top-28" aria-label="Фильтры каталога">
+        <aside className="h-fit rounded-3xl border border-[#d3c5b4] bg-[#fbf8f2] p-6 lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto lg:overscroll-contain" aria-label="Фильтры каталога">
           <div className="flex items-center justify-between"><h2 className="text-lg font-semibold">Фильтры</h2><button onClick={reset} className="text-xs font-semibold text-[#8b5e3c]" type="button">Сбросить</button></div>
           <FilterGroup title="Бренд" options={catalogOptions.brands} selected={brands} render={(value) => value} onToggle={(value) => setBrands(toggleValue(brands, value))} />
           <FilterGroup title="Класс нагрузки" options={catalogOptions.classes} selected={classes} render={(value) => `${value} класс`} onToggle={(value) => setClasses(toggleValue(classes, value))} />
