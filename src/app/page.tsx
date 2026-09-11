@@ -20,7 +20,7 @@ const heroProducts = [
   ["908", "Дуб белёный", assetPath("/products/spc-908.jpg")],
 ];
 
-const popularProducts = getStockWeightedProducts(products, 5);
+const popularProducts = getStockWeightedProducts(products, 6);
 
 const spcBenefits = [
   ["01", "Не боится бытовой влаги", "Жёсткая минерально-полимерная основа не разбухает от пролитой воды, поэтому покрытие подходит для кухни и прихожей."],
@@ -109,7 +109,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-[#d9cdbd] bg-[#eee5d7]"><div className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-12"><div className="mb-9 flex items-end justify-between gap-5"><div><p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#8b5e3c]">Выбор покупателей</p><h2 className="text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">Популярные товары</h2></div><Link className="hidden text-sm font-semibold text-[#71482e] sm:block" href="/catalog">Смотреть все →</Link></div><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">{popularProducts.map(product => <ProductCard key={product.id} product={product} />)}</div></div></section>
+      <section className="border-y border-[#d9cdbd] bg-[#eee5d7]"><div className="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-12"><div className="mb-9 flex items-end justify-between gap-5"><div><p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#8b5e3c]">Выбор покупателей</p><h2 className="text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">Популярные товары</h2></div><Link className="hidden text-sm font-semibold text-[#71482e] sm:block" href="/catalog">Смотреть все →</Link></div><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{popularProducts.map(product => <ProductCard key={product.id} product={product} />)}</div></div></section>
 
       <section className="bg-[#3e3228] text-[#f7efe5]"><div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-12"><div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c9aa8c]">Без лишних посредников</p><h2 className="mt-3 text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">Почему у нас выгодно</h2><p className="mt-4 max-w-sm text-sm leading-6 text-[#cfc0b2]">Работаем напрямую с производством и поддерживаем складской запас в Смоленске.</p></div><div className="grid gap-px overflow-hidden rounded-3xl bg-white/15 sm:grid-cols-2">{[["01","Прямой контракт с заводом"],["02","Цена без посреднической наценки"],["03","Ламинат в наличии в Смоленске"],["04","Помощь с расчётом и подбором"]].map(([n,t])=><div key={n} className="bg-[#493b30] p-6"><span className="text-xs text-[#c9aa8c]">{n}</span><h3 className="mt-4 text-lg font-semibold">{t}</h3></div>)}</div></div></section>
 
