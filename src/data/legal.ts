@@ -6,8 +6,8 @@ export const legalDetails = {
   inn: "672707561598",
   registrationNumber: "324670000018304",
   privacyEmail: "67@67moto.ru",
-  contactPhone: "+7 926 123 37 77",
-  contactPhoneHref: "tel:+79261233777",
+  contactPhone: "+7 995 114 57 77",
+  contactPhoneHref: "tel:+79951145777",
   siteAddress: "https://laminat.sale",
 };
 
